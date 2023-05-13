@@ -1,28 +1,18 @@
-var express = require('express');
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
 var path=require('path');
-var app = express();
 
-//server configuration
+
+
 app.use(express.static(path.join(__dirname,'public')));
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(___dirname + '/index.html'));
- });
- 
- app.get('/', function (req, res) {
-    res.sendFile(path.join(___dirname + '/script/app.js'));
- });
-
-
-app.get('/hello', function (req, res) {
-    var person={firstName:'Anuja',lastName:'Suryawanshi',age:23};
-    res.send(person);
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
 });
 
-var server = app.listen(8888, function () {
-    var host = server.address().address
-    var port = server.address().port
-    console.log("Example app listening at http://localhost:8888", host, port)
-});
+app.use(bodyParser.urlencoded({ extended: true }))
 
-  
+app.listen(3000, () => {
+    console.log("Listen on the port 3000...");
+});
